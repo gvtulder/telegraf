@@ -1,6 +1,7 @@
 package pigpiod
 
 /*
+#include <pigpio.h>
 #include <pigpiod_if2.h>
 */
 import "C"
