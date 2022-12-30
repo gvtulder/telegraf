@@ -16,3 +16,12 @@ jobs:
 
       - name: Build
         run: make build
+
+      - name: Build armel
+        run: make package include_packages="linux_armel.tar.gz"
+
+      - name: Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/*
