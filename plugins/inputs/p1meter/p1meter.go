@@ -31,13 +31,16 @@ type P1Packet struct {
 	low_consumed int
 	high_consumed int
 	current_consumed int
+	gas_consumed int
 }
 
 var fieldRegexp = regexp.MustCompile("^([-.:0-9]+)(?:\\(([^)]*)\\))+")
 var kWhRegexp = regexp.MustCompile("^([.0-9]+)\\*kWh$")
+var m3Regexp = regexp.MustCompile("^([.0-9]+)\\*m3$")
 
 func updateField(packet *P1Packet, key string, value string) (parsingError error) {
 	var kwhField *int
+	var gasField *int
 	switch key {
 	case "0-0:96.1.1":
 		packet.eid = value
@@ -53,6 +56,14 @@ func updateField(packet *P1Packet, key string, value string) (parsingError error
 		kwhField = &packet.high_consumed
 	case "1-0:1.7.0":
 		kwhField = &packet.current_consumed
+	case "1-1:24.2.1":
+		gasField = &packet.gas_consumed
+	case "1-2:24.2.1":
+		gasField = &packet.gas_consumed
+	case "1-3:24.2.1":
+		gasField = &packet.gas_consumed
+	case "1-4:24.2.1":
+		gasField = &packet.gas_consumed
 	}
 	if kwhField != nil {
 		v, err := strconv.ParseFloat(strings.Split(value, "*")[0], 64)
@@ -60,6 +71,14 @@ func updateField(packet *P1Packet, key string, value string) (parsingError error
 			parsingError = errors.New(fmt.Sprintf("error parsing kWh figure, '%s'", value))
 		} else {
 			*kwhField = int(v * 1000)
+		}
+	}
+	if gasField != nil {
+		v, err := strconv.ParseFloat(strings.Split(value, "*")[0], 64)
+		if err != nil {
+			parsingError = errors.New(fmt.Sprintf("error parsing m3 figure, '%s'", value))
+		} else {
+			*gasField = int(v)
 		}
 	}
 	return parsingError
@@ -119,6 +138,7 @@ func (t *P1Meter) Start(acc telegraf.Accumulator) error {
 			"low_consumed": packet.low_consumed,
 			"high_consumed": packet.high_consumed,
 			"current_consumed": packet.current_consumed,
+			"gas_consumed": packet.gas_consumed,
 		}
 		tags := map[string]string{
 			"tarief": strconv.Itoa(packet.tariff),
