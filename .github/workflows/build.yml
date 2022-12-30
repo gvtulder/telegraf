@@ -14,24 +14,24 @@ jobs:
           go-version: 1.18.0
           cache: true
 
-      - name: Install pigpiod
-        run: |
-          # sudo apt-get update
-          # sudo apt-get install libpigpiod-if2-1 libpigpiod-if-dev
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpio-dev_1.78-1%2Brpi1_armhf.deb
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpio1_1.78-1%2Brpi1_armhf.deb
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpiod-if-dev_1.78-1%2Brpi1_armhf.deb
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpiod-if1_1.78-1%2Brpi1_armhf.deb
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpiod-if2-1_1.78-1%2Brpi1_armhf.deb
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/pigpio-tools_1.78-1%2Brpi1_armhf.deb
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/pigpio_1.78-1%2Brpi1_armhf.deb
-          wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/pigpiod_1.78-1%2Brpi1_armhf.deb
-          mkdir -p dependencies/
-          for i in *.deb ; do
-            echo "Extracting $i"
-            dpkg -x $i dependencies/
-          done
-          find dependencies/
+#     - name: Install pigpiod
+#       run: |
+#         # sudo apt-get update
+#         # sudo apt-get install libpigpiod-if2-1 libpigpiod-if-dev
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpio-dev_1.78-1%2Brpi1_armhf.deb
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpio1_1.78-1%2Brpi1_armhf.deb
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpiod-if-dev_1.78-1%2Brpi1_armhf.deb
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpiod-if1_1.78-1%2Brpi1_armhf.deb
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpiod-if2-1_1.78-1%2Brpi1_armhf.deb
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/pigpio-tools_1.78-1%2Brpi1_armhf.deb
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/pigpio_1.78-1%2Brpi1_armhf.deb
+#         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/pigpiod_1.78-1%2Brpi1_armhf.deb
+#         mkdir -p dependencies/
+#         for i in *.deb ; do
+#           echo "Extracting $i"
+#           dpkg -x $i dependencies/
+#         done
+#         find dependencies/
 
 #     - name: Build
 #       run: |
@@ -42,8 +42,8 @@ jobs:
 
       - name: Build armhf
         run: |
-          export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include -L$(pwd)/dependencies/usr/lib"
-          export CGO_LDLAGS="-L$(pwd)/dependencies/usr/lib"
+#         export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include -L$(pwd)/dependencies/usr/lib"
+#         export CGO_LDLAGS="-L$(pwd)/dependencies/usr/lib"
           make clean
           make package include_packages="linux_armhf.tar.gz"
 
