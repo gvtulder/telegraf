@@ -9,7 +9,7 @@ import (
 	"github.com/influxdata/telegraf"
 	"github.com/influxdata/telegraf/plugins/inputs"
 
-	"github.com/influxdata/telegraf/pigpiod"
+	"github.com/influxdata/telegraf/plugins/common/pigpiod"
 )
 
 type DHT22 struct {
