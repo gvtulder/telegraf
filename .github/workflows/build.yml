@@ -42,8 +42,8 @@ jobs:
 
       - name: Build armhf
         run: |
-#         export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include -L$(pwd)/dependencies/usr/lib"
-#         export CGO_LDLAGS="-L$(pwd)/dependencies/usr/lib"
+          # export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include -L$(pwd)/dependencies/usr/lib"
+          # export CGO_LDLAGS="-L$(pwd)/dependencies/usr/lib"
           make clean
           make package include_packages="linux_armhf.tar.gz"
 
