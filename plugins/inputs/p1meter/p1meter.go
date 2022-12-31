@@ -31,7 +31,7 @@ type P1Packet struct {
 	low_consumed int
 	high_consumed int
 	current_consumed int
-	gas_consumed int
+	gas_consumed float32
 }
 
 var fieldRegexp = regexp.MustCompile("^([-.:0-9]+)(?:\\(([^)]*)\\))+")
@@ -78,7 +78,7 @@ func updateField(packet *P1Packet, key string, value string) (parsingError error
 		if err != nil {
 			parsingError = errors.New(fmt.Sprintf("error parsing m3 figure, '%s'", value))
 		} else {
-			*gasField = int(v)
+			*gasField = v
 		}
 	}
 	return parsingError
