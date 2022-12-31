@@ -56,13 +56,13 @@ func updateField(packet *P1Packet, key string, value string) (parsingError error
 		kwhField = &packet.high_consumed
 	case "1-0:1.7.0":
 		kwhField = &packet.current_consumed
-	case "1-1:24.2.1":
+	case "0-1:24.2.1":
 		gasField = &packet.gas_consumed
-	case "1-2:24.2.1":
+	case "0-2:24.2.1":
 		gasField = &packet.gas_consumed
-	case "1-3:24.2.1":
+	case "0-3:24.2.1":
 		gasField = &packet.gas_consumed
-	case "1-4:24.2.1":
+	case "0-4:24.2.1":
 		gasField = &packet.gas_consumed
 	}
 	if kwhField != nil {
