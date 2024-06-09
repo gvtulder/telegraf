@@ -9,7 +9,7 @@ import (
 	"github.com/influxdata/telegraf"
 	"github.com/influxdata/telegraf/plugins/inputs"
 
-	"github.com/influxdata/telegraf/plugins/common/pigpiod"
+  "github.com/go-pigpio/pigpio/pigpio"
 )
 
 type Watermeter struct {
