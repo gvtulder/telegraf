@@ -14,10 +14,10 @@ jobs:
           go-version: 1.19.0
           cache: true
 
-#     - name: Install pigpiod
-#       run: |
-#         # sudo apt-get update
-#         # sudo apt-get install libpigpiod-if2-1 libpigpiod-if-dev
+      - name: Install pigpiod
+        run: |
+          sudo apt-get update
+          sudo apt-get install libpigpiod-if2-1 libpigpiod-if-dev
 #         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpio-dev_1.78-1%2Brpi1_armhf.deb
 #         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpio1_1.78-1%2Brpi1_armhf.deb
 #         wget -q https://archive.raspbian.org/raspbian/pool/main/p/pigpio/libpigpiod-if-dev_1.78-1%2Brpi1_armhf.deb
@@ -33,12 +33,12 @@ jobs:
 #         done
 #         find dependencies/
 
-#     - name: Build
-#       run: |
-#         export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include"
-#         env
-#         ls -lah "$(pwd)/dependencies/usr/include"
-#         make build
+      - name: Build
+        run: |
+          export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include"
+          env
+          ls -lah "$(pwd)/dependencies/usr/include"
+          make build
 
       - name: Build armhf
         run: |
