@@ -35,14 +35,14 @@ jobs:
 
       - name: Build
         run: |
-          export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include"
+          export CGO_CFLAGS="-I$(pwd)/dep/dependencies/usr/include"
           env
-          ls -lah "$(pwd)/dependencies/usr/include"
+          ls -lah "$(pwd)/dep/dependencies/usr/include"
           make build
 
       - name: Build armhf
         run: |
-          # export CGO_CFLAGS="-I$(pwd)/dependencies/usr/include -L$(pwd)/dependencies/usr/lib"
+          export CGO_CFLAGS="-I$(pwd)/dep/dependencies/usr/include -L$(pwd)/dep/dependencies/usr/lib"
           # export CGO_LDLAGS="-L$(pwd)/dependencies/usr/lib"
           make clean
           make package include_packages="linux_armhf.tar.gz"
